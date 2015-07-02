@@ -21,6 +21,16 @@
 								<option id="it.baeyens.arduino.compiler.cpp.sketch.option.incpath.1062038950" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.cpp.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/arduino/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/arduino/variant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/Adafruit_TCS34725}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/SPI}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/SdFat}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/SdFat/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/Wire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/Wire/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/EEPROM}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/MPR121}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/SFEMP3Shield}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/ComuplaLib}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.cpp.sketch.input.1625220340" name="CPP source files" superClass="it.baeyens.arduino.compiler.cpp.sketch.input"/>
 							</tool>
@@ -28,6 +38,16 @@
 								<option id="it.baeyens.arduino.compiler.c.sketch.option.incpath.439243783" name="Include Paths (-I)" superClass="it.baeyens.arduino.compiler.c.sketch.option.incpath" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/arduino/core}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/arduino/variant}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/Adafruit_TCS34725}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/SPI}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/SdFat}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/SdFat/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/Wire}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/Wire/utility}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/EEPROM}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/MPR121}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/SFEMP3Shield}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/ComuplaMain/Libraries/ComuplaLib}&quot;"/>
 								</option>
 								<inputType id="it.baeyens.arduino.compiler.c.sketch.input.1544911803" name="C Source Files" superClass="it.baeyens.arduino.compiler.c.sketch.input"/>
 							</tool>

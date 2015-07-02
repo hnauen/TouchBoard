@@ -27,9 +27,49 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>Libraries/Adafruit_TCS34725</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/Adafruit_TCS34725</locationURI>
+		</link>
+		<link>
+			<name>Libraries/ComuplaLib</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/ComuplaLib</locationURI>
+		</link>
+		<link>
+			<name>Libraries/EEPROM</name>
+			<type>2</type>
+			<locationURI>ArduinoHardwareLibPath/EEPROM</locationURI>
+		</link>
+		<link>
+			<name>Libraries/MPR121</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/MPR121</locationURI>
+		</link>
+		<link>
+			<name>Libraries/SFEMP3Shield</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/SFEMP3Shield</locationURI>
+		</link>
+		<link>
+			<name>Libraries/SPI</name>
+			<type>2</type>
+			<locationURI>ArduinoHardwareLibPath/SPI</locationURI>
+		</link>
+		<link>
+			<name>Libraries/SdFat</name>
+			<type>2</type>
+			<locationURI>ArduinoPivateLibPath/SdFat</locationURI>
+		</link>
+		<link>
+			<name>Libraries/Wire</name>
+			<type>2</type>
+			<locationURI>ArduinoHardwareLibPath/Wire</locationURI>
+		</link>
+		<link>
 			<name>arduino/core</name>
 			<type>2</type>
-			<locationURI>ArduinoPlatformPath/cores/arduino</locationURI>
+			<locationURI>ArduinoPath/hardware/arduino/avr/cores/arduino</locationURI>
 		</link>
 		<link>
 			<name>arduino/variant</name>
@@ -40,15 +80,15 @@
 	<variableList>
 		<variable>
 			<name>ArduinoHardwareLibPath</name>
-			<value>file:/Users/holger.nauen/Applications/Arduino_1.6.1.app/Contents/Resources/Java/hardware/arduino/avr/libraries</value>
+			<value>file:/Users/holger.nauen/Documents/Arduino/hardware/bare-conductive-arduino-public/avr/libraries</value>
 		</variable>
 		<variable>
 			<name>ArduinoPinPath</name>
-			<value>file:/Users/holger.nauen/Applications/Arduino_1.6.1.app/Contents/Resources/Java/hardware/arduino/avr/variants</value>
+			<value>file:/Users/holger.nauen/Documents/Arduino/hardware/bare-conductive-arduino-public/avr/variants</value>
 		</variable>
 		<variable>
 			<name>ArduinoPlatformPath</name>
-			<value>file:/Users/holger.nauen/Applications/Arduino_1.6.1.app/Contents/Resources/Java/hardware/arduino/avr</value>
+			<value>file:/Users/holger.nauen/Documents/Arduino/hardware/bare-conductive-arduino-public/avr</value>
 		</variable>
 	</variableList>
 </projectDescription>
