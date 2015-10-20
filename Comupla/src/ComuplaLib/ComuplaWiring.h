@@ -1,8 +1,25 @@
-/*
- * Config.h
+/**
+ * @file 	ComuplaWiring.h
+ * @author 	hn [at] holgernauen [dot] de
+ * @date 	30.05.2015
  *
- *  Created on: 30.05.2015
- *      Author: holger.nauen
+ * @section LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @section DESCRIPTION
+ *
  */
 
 #ifndef COMUPLACONFIG_H_
@@ -15,26 +32,20 @@
 // ----------------------------------------------
 
 // Digital Led Pins
+#define DIGITAL_LED_COUNT 4
 enum DIGITAL_LED_PIN {
-	TCS34725_LED = 10,	// LED in TCS34725
-	REPEAT_LED, 			// Repeat Album(s)
-	PLAYALL_LED, 			// Play all 4 Albums
-	ACTIVITY_LED			// Show Activities (== LED_BUILTIN)
+	PIN_TCS34725_LED = 10,	// LED in TCS34725
+	PIN_REPEAT_LED, 		// Repeat Album(s)
+	PIN_PLAYALL_LED, 		// Play all 4 Albums
+	PIN_PAUSE_LED			// Pause music (== LED_BUILTIN)
 };
-
-// PWM
-#define ACTIVITY_LED_OFF    0
-#define ACTIVITY_LED_ON    	24
-#define ACTIVITY_LED_HIGH  	255
-
-#define FADE_DELAY 			50
 
 // ----------------------------------------------
 // Arduino Analog Pins
 // ----------------------------------------------
 
 // Analog Button Pins
-#define ANALOG_NUM_BUTTONS 5
+#define ANALOG_BUTTON_COUNT 5
 enum ANALOG_BUTTON_PIN {
 	PIN_INSERT_BUTTON = A0,
 	PIN_PLAY_1_BUTTON,
@@ -42,16 +53,19 @@ enum ANALOG_BUTTON_PIN {
 	PIN_PLAY_3_BUTTON,
 	PIN_PLAY_4_BUTTON
 };
-enum ANALOG_BUTTON_ID {
-	INSERT_BUTTON,
-	PLAY_1_BUTTON,
-	PLAY_2_BUTTON,
-	PLAY_3_BUTTON,
-	PLAY_4_BUTTON
+enum ANALOG_BUTTON_IDX {
+	IDX_INSERT_BUTTON,
+	IDX_PLAY_1_BUTTON,
+	IDX_PLAY_2_BUTTON,
+	IDX_PLAY_3_BUTTON,
+	IDX_PLAY_4_BUTTON
 };
 
 // Analog Led Pins
-#define RANDOM_LED A5
+#define ANALOG_LED_COUNT 1
+enum ANALOG_LED_PIN {
+	PIN_RANDOM_LED = A5
+};
 
 
 // ----------------------------------------------
@@ -59,7 +73,7 @@ enum ANALOG_BUTTON_ID {
 // ----------------------------------------------
 
 // MPR121 Electrodes
-#define MPR121_NUM_ELECTRODES 8
+#define MPR121_ELECTRODE_COUNT 8
 enum MPR121_ELECTRODE {
 	RANDOM_BUTTON,
 	PLAYALL_BUTTON,
@@ -68,12 +82,13 @@ enum MPR121_ELECTRODE {
 	PREV_BUTTON,
 	VOLUME_UP_BUTTON,
 	VOLUME_DOWN_BUTTON,
-	ON_BUTTON
+	PAUSE_BUTTON
 };
 
+
 // MPR121 Digital Pins
-#define MPR121_NUM_DIG_PINS 4
-enum MPR121_PIN {
+#define MPR121_LED_COUNT 4
+enum MPR121_LED_PIN {
 	PIN_PLAY_1_LED = 8,
 	PIN_PLAY_2_LED,
 	PIN_PLAY_3_LED,
@@ -94,7 +109,7 @@ enum MPR121_PIN {
 // EEPROM - Storage of colors and album info
 // ----------------------------------------------
 
-#define COLORT_MAX_COUNT 16
+#define MAX_COLORT_COUNT 16
 
 typedef struct {
 	uint16_t r;
@@ -106,8 +121,8 @@ typedef struct {
 typedef struct {
 	byte volume;
 	byte colorCount;
-	color_t color[COLORT_MAX_COUNT];
-	byte fileCount[COLORT_MAX_COUNT][4];
+	color_t color[MAX_COLORT_COUNT];
+	byte fileCount[MAX_COLORT_COUNT][4];
 } eeprom_data_t;
 
 

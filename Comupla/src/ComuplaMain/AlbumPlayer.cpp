@@ -1,17 +1,34 @@
-/*
- * AlbumPlayer.cpp
+/**
+ * @file 	AlbumPlayer.cpp
+ * @author 	hn [at] holgernauen [dot] de
+ * @date 	06.06.2015
  *
- *  Created on: 06.06.2015
- *      Author: holger.nauen
+ * @section LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @section DESCRIPTION
+ *
  */
 
 #include <ComuplaWiring.h>
 #include "AlbumPlayer.h"
 
-void AlbumPlayer::begin(SdFat* _pSd, SFEMP3Shield* _pMP3player, AlbumChangeCallbackFunction _albumChangeCallback) {
-	pSd = _pSd;
-	pMP3player = _pMP3player;
-	albumChangeCallback = _albumChangeCallback;
+void AlbumPlayer::begin(SdFat* pSd, SFEMP3Shield* pMP3player, TrackChangeCallbackFunction trackChangeCallback) {
+	this->pSd = pSd;
+	this->pMP3player = pMP3player;
+	this->trackChangeCallback = trackChangeCallback;
 
 	playlistEntries = 0;
 	isRandom = false;
@@ -36,10 +53,6 @@ void AlbumPlayer::start(byte quartet, byte album, byte trackCount[4]) {
 	initialAlbum = album;
 	memcpy(initalTrackCount,trackCount,4);
 
-	sprintf(buffer,"q=%d a=%d c=%d,%d,%d,%d",quartet,album,trackCount[0],trackCount[1],trackCount[2],trackCount[3]);
-	Serial.println(buffer);
-
-
 	populatePlaylist(album, trackCount);
 	play(0);
 }
@@ -47,7 +60,7 @@ void AlbumPlayer::start(byte quartet, byte album, byte trackCount[4]) {
 void AlbumPlayer::stop() {
 	trackStarted = false;
 	pMP3player->stopTrack();
-	albumChangeCallback(NO_ALBUM);
+	trackChangeCallback(NO_ALBUM,0);
 }
 
 void AlbumPlayer::nextTrack() {
@@ -82,29 +95,24 @@ void AlbumPlayer::play(byte track) {
 	if (pSd->chdir(directoryName)) {
 		sprintf(fileName, "%02d.mp3", playlist[track].track+1);
 		pMP3player->playMP3(fileName,0);
-
-		Serial.print(directoryName);
-		Serial.print("/");
-		Serial.println(fileName);
-
 		currentTrack = track;
 		trackStarted = true;
-		albumChangeCallback(playlist[track].album);
+		trackChangeCallback(playlist[track].album,playlist[track].track);
 	}
 }
 
 
-void AlbumPlayer::setPlayAll(boolean on) {
+void AlbumPlayer::setPlayAll(bool on) {
 	this->isPlayAll = on;
 	//@todo: Rebuild playlist if playing
 }
 
-void AlbumPlayer::setRandom(boolean on) {
+void AlbumPlayer::setRandom(bool on) {
 	this->isRandom = on;
 	//@todo: Rebuild playlist if playing
 }
 
-void AlbumPlayer::setRepeat(boolean on) {
+void AlbumPlayer::setRepeat(bool on) {
 	this->isRepeat = on;
 }
 
@@ -143,3 +151,12 @@ void AlbumPlayer::addAlbum(byte album, byte trackCount) {
 	}
 }
 
+boolean AlbumPlayer::setPause(bool on) {
+	if (on && pMP3player->getState() == playback){
+		pMP3player->pauseMusic();
+		return true;
+	} else if (!on && pMP3player->getState() == paused_playback) {
+		pMP3player->resumeMusic();
+	}
+	return false;
+}

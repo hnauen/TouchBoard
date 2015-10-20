@@ -1,7 +1,7 @@
 /**
- * @file 	ComuplaTools.h
+ * @file 	ComuplaLED.h
  * @author 	hn [at] holgernauen [dot] de
- * @date 	31.05.2015
+ * @date 	28.06.2015
  *
  * @section LICENSE
  *
@@ -22,37 +22,32 @@
  *
  */
 
-#ifndef COMUPLATOOLS_H_
-#define COMUPLATOOLS_H_
+#ifndef LIBRARIES_COMUPLALIB_COMUPLALED_H_
+#define LIBRARIES_COMUPLALIB_COMUPLALED_H_
 
-#include <Arduino.h>
-#include <SdFat.h>
+#include <MPR121.h>
 
-#include "ComuplaWiring.h"
+#define COMUPLALED_DELAY_MILLIS 500
 
-class ComuplaTools {
+class ComuplaLED {
 
 public:
-	void begin();
-	void halt(byte errorCode);
-    byte getVolume();
-	void storeVolume(byte volume);
-	void initializeEEPROM();
-    byte getColorCount();
-	void storeColorCount(byte colorCount);
-	void storeColor(byte idx, color_t color);
-	void listCurrentValues();
-    byte getNearestColor(color_t color, double *pDistance = NULL);
-    void checkMP3Files(SdFat sdFat);
-    byte* getFileCount(byte idx);
+	void begin(int digitalPin, bool useMPR121 = false);
+
+	void process();
+	void toggle(bool on);
 
 private:
-	eeprom_data_t eepromData;
-	inline void readFromEEPROM();
-	inline void writeToEEPROM();
+	inline void setPinMode();
+	inline void switchOn();
+	inline void switchOff();
+	void led(int state);
+	void delayOn();
 
-	char printBuffer[64];
-
+	int digitalPin;
+	int numOn;
+	unsigned long deleayOnMillis;
+	bool useMPR121;
 };
 
-#endif /* COMUPLATOOLS_H_ */
+#endif /* LIBRARIES_COMUPLALIB_COMUPLALED_H_ */

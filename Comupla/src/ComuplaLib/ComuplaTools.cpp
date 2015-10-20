@@ -1,8 +1,25 @@
-/*
- * Tools.cpp
+/**
+ * @file 	ComuplaTools.cpp
+ * @author 	hn [at] holgernauen [dot] de
+ * @date 	31.05.2015
  *
- *  Created on: 31.05.2015
- *      Author: holger.nauen
+ * @section LICENSE
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ *
+ * @section DESCRIPTION
+ *
  */
 
 #include "ComuplaTools.h"
@@ -14,31 +31,17 @@
 
 void ComuplaTools::begin(){
 	readFromEEPROM();
-	fadeBrightness = 0;
-	lastFadeChange = millis();
 }
 
 void ComuplaTools::halt(byte errorCode){
 	while (true) {
 		for (int i=0; i<errorCode; i++) {
 			delay(200);
-			digitalWrite(ACTIVITY_LED, HIGH);
+			digitalWrite(LED_BUILTIN, HIGH);
 			delay(200);
-			digitalWrite(ACTIVITY_LED, LOW);
+			digitalWrite(LED_BUILTIN, LOW);
 		}
 		delay(400);
-	}
-}
-
-void ComuplaTools::fadeLED(void){
-	unsigned long now = millis();
-	if (lastFadeChange + FADE_DELAY < now){
-		lastFadeChange = now;
-		if (fadeBrightness == ACTIVITY_LED_ON) {
-			fadeBrightness *= -1;
-		}
-		fadeBrightness++;
-		analogWrite(ACTIVITY_LED, abs(fadeBrightness));
 	}
 }
 
@@ -63,17 +66,16 @@ void ComuplaTools::storeVolume(byte volume){
 void ComuplaTools::initializeEEPROM(){
 	memset(&eepromData,0,sizeof(eepromData));
 	eepromData.volume = DEFAULT_VOLUME;
-	eepromData.colorCount = COLORT_MAX_COUNT;
+	eepromData.colorCount = MAX_COLORT_COUNT;
 	writeToEEPROM();
 }
-
 
 byte ComuplaTools::getColorCount(){
 	return eepromData.colorCount;
 }
 
 void ComuplaTools::storeColorCount(byte colorCount){
-	if (colorCount <= COLORT_MAX_COUNT){
+	if (colorCount <= MAX_COLORT_COUNT){
 		eepromData.colorCount = colorCount;
 		writeToEEPROM();
 	} else {
@@ -82,7 +84,7 @@ void ComuplaTools::storeColorCount(byte colorCount){
 }
 
 void ComuplaTools::storeColor(byte idx, color_t color) {
-	if (idx <= COLORT_MAX_COUNT){
+	if (idx <= MAX_COLORT_COUNT){
 		eepromData.color[idx] = color;
 		writeToEEPROM();
 	} else {
@@ -98,7 +100,7 @@ void ComuplaTools::listCurrentValues(){
 	sprintf(printBuffer,"cnt: %2d", eepromData.colorCount);
 	Serial.println(printBuffer);
 
-	for (byte i=0; i<COLORT_MAX_COUNT; i++){
+	for (byte i=0; i<MAX_COLORT_COUNT; i++){
 		sprintf(printBuffer, "%02d : %05u %05u %05u %05u - %02d %02d %02d %02d", i+1,
 				eepromData.color[i].r,
 				eepromData.color[i].g,
@@ -139,7 +141,9 @@ byte ComuplaTools::getNearestColor(color_t color, double* pDistance) {
 		}
 	}
 
-	*pDistance = nearestDistance;
+	if (pDistance != NULL){
+		*pDistance = nearestDistance;
+	}
 
 	return nearestColor;
 
@@ -147,7 +151,7 @@ byte ComuplaTools::getNearestColor(color_t color, double* pDistance) {
 
 void ComuplaTools::checkMP3Files(SdFat sdFat){
 	char directoryName[]="000";
-	for (int i=0; i<COLORT_MAX_COUNT; i++) {
+	for (int i=0; i<MAX_COLORT_COUNT; i++) {
 		for (int j=0; j<4; j++) {
 			sprintf(directoryName, "%02d%1d", i+1, j+1);
 			sdFat.chdir("/");

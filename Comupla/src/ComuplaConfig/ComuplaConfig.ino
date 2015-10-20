@@ -35,6 +35,7 @@ void help(){
 }
 
 void blink(int pin){
+	/*
 	digitalWrite(pin, HIGH);
 	delay(100);
 	digitalWrite(pin, LOW);
@@ -43,6 +44,7 @@ void blink(int pin){
 		analogWrite(pin,10*i);
 		delay(200);
 	}
+	*/
 
 	delay(100);
 	digitalWrite(pin, HIGH);
@@ -60,8 +62,8 @@ void setup()
 	if(!tcs34725.begin()){
 		tools.halt(ERROR_RGB_SENSOR_BEGIN);
 	}
-	pinMode(TCS34725_LED, OUTPUT);
-	digitalWrite(TCS34725_LED, HIGH);
+	pinMode(PIN_TCS34725_LED, OUTPUT);
+	digitalWrite(PIN_TCS34725_LED, HIGH);
 
 	if(!sdFat.begin(SD_SEL, SPI_FULL_SPEED)){
 		tools.halt(ERROR_SD_BEGIN);
@@ -71,10 +73,10 @@ void setup()
 		tools.halt(ERROR_SD_CHDIR);
 	}
 
-	pinMode(REPEAT_LED, OUTPUT);
-	pinMode(PLAYALL_LED, OUTPUT);
-	pinMode(ACTIVITY_LED, OUTPUT);
-	pinMode(RANDOM_LED, OUTPUT);
+	pinMode(PIN_REPEAT_LED, OUTPUT);
+	pinMode(PIN_PLAYALL_LED, OUTPUT);
+	pinMode(PIN_PAUSE_LED, OUTPUT);
+	pinMode(PIN_RANDOM_LED, OUTPUT);
 
 }
 
@@ -90,16 +92,16 @@ void loop()
 			switch (byteRead) {
 
 			case 'b': {
-				blink(TCS34725_LED);
-				blink(REPEAT_LED);
-				blink(PLAYALL_LED);
-				blink(ACTIVITY_LED);
-				blink(RANDOM_LED);
+				blink(PIN_TCS34725_LED);
+				blink(PIN_REPEAT_LED);
+				blink(PIN_PLAYALL_LED);
+				blink(PIN_PAUSE_LED);
+				blink(PIN_RANDOM_LED);
 			}
 			break;
 			case 'c': {
 				numberRead = Serial.parseInt();
-				if (numberRead>0 && numberRead<COLORT_MAX_COUNT) {
+				if (numberRead>0 && numberRead<MAX_COLORT_COUNT) {
 					tools.storeColorCount(numberRead);
 					Serial.print("New color count: ");
 					Serial.print(numberRead);
@@ -156,13 +158,13 @@ void loop()
 
 			case 's': {
 				numberRead = Serial.parseInt();
-				if (numberRead>0 && numberRead<=COLORT_MAX_COUNT) {
-					tools.storeColor(numberRead,tcs34725.color);
+				if (numberRead>0 && numberRead<=MAX_COLORT_COUNT) {
+					tools.storeColor(numberRead-1,tcs34725.color);
 					Serial.print("New color: ");
-					Serial.print(numberRead-1);
+					Serial.print(numberRead);
 					Serial.println();
 				} else {
-					Serial.println("Usage: s number");
+					Serial.println("Usage: s number (one-based)");
 				}
 			}
 			break;

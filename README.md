@@ -114,8 +114,20 @@ Simply configure this program as an external tool.
 
 ## License
 
-All files are released under creative commons license 4.0:
+### Software
+
+This repository contains software: e.g. sketches, libraries and scripts.
+
+This software is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+### Other files
+
+All other files are released under creative commons license 4.0:
 
 [Attribution-ShareAlike CC BY-SA](http://creativecommons.org/licenses/by-sa/4.0/)
 
-The software is furnished "as is", without technical support, and with no warranty, express or implied, as to its usefulness for any purpose.
+The files are furnished "as is", without technical support, and with no warranty, express or implied, as to its usefulness for any purpose.
+
